@@ -1,0 +1,33 @@
+CREATE DATABASE dbcnxcrianca;
+
+CREATE TABLE crianca(
+id_crianca int AUTO_INCREMENT PRIMARY KEY,
+nome_crianca varchar(50),
+idade int,
+res_ali varchar(100)
+);
+
+CREATE TABLE pais(
+id_pais int AUTO_INCREMENT PRIMARY KEY,
+nome_pais varchar(50),
+telefone int,
+telefone_2 int,
+fk_crianca_pais int
+);
+
+CREATE TABLE ficha(
+id_ficha int AUTO_INCREMENT PRIMARY KEY,
+culto_data date,
+fk_crianca_ficha int,
+fk_pais_ficha int,
+FOREIGN KEY (fk_crianca_ficha) REFERENCES crianca(id_crianca),
+FOREIGN KEY (fk_pais_ficha) REFERENCES pais(id_pais)
+);
+
+ALTER TABLE pais ADD CONSTRAINT fk_crianca_pais FOREIGN KEY (fk_crianca_pais) REFERENCES crianca(id_crianca);
+
+INSERT INTO crianca (id_crianca, nome_crianca, idade, res_ali) VALUES (1, "teste crianca", 12, "Nada");
+
+INSERT INTO pais (id_pais, nome_pais, telefone, telefone_2, fk_crianca_pais) VALUES (1, "TESTE PAI", 999999999, 999999998, 1);
+
+INSERT INTO ficha (id_ficha, culto_data, fk_crianca_ficha, fk_pais_ficha) VALUES (1, "2019-12-27", 1, 1);
